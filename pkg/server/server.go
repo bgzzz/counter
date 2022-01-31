@@ -13,7 +13,7 @@ import (
 )
 
 const (
-	apiPrefix = "/api/v1"
+	apiPrefix = "/api"
 
 	MaxUint64 = ^uint64(0)
 )
@@ -41,7 +41,7 @@ type Server struct {
 func (srv *Server) setupHandlers() *http.ServeMux {
 
 	mux := http.NewServeMux()
-	mux.HandleFunc(path.Join(apiPrefix, "counter"),
+	mux.HandleFunc(path.Join(apiPrefix, model.APIVersion, "counter"),
 		srv.handleCounter)
 	return mux
 }
