@@ -77,7 +77,7 @@ func (srv *Server) getCounter(w http.ResponseWriter) {
 		Counter: srv.counter,
 	}
 
-	log.Debug("get the counter with value %d was executed",
+	log.Debugf("get the counter with value %d was executed",
 		counter.Counter)
 
 	sendCntRsp(w, &counter, http.StatusAccepted)
@@ -98,7 +98,7 @@ func (srv *Server) incrCounter(w http.ResponseWriter) {
 
 	srv.counter++
 
-	log.Debug("increment counter with value %d was executed",
+	log.Debugf("increment counter with value %d was executed",
 		srv.counter)
 
 	sendCntRsp(w, &model.CounterRsp{Counter: srv.counter},
@@ -120,7 +120,7 @@ func (srv *Server) decrCounter(w http.ResponseWriter) {
 
 	srv.counter--
 
-	log.Debug("decrement counter with value %d was executed",
+	log.Debugf("decrement counter with value %d was executed",
 		srv.counter)
 
 	sendCntRsp(w, &model.CounterRsp{Counter: srv.counter},
@@ -145,6 +145,6 @@ func sendCntRsp(w http.ResponseWriter,
 
 	w.WriteHeader(status)
 	w.Write(b)
-	log.Debug("get the counter with value %d was executed",
+	log.Debugf("get the counter with value %d was executed",
 		counter.Counter)
 }
