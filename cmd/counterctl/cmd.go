@@ -72,8 +72,7 @@ func createCtlApp() *cli.App {
 }
 
 type Parameters struct {
-	host    string
-	timeout int
+	host string
 }
 
 func runAction(c *cli.Context, f func(params *Parameters) error) error {

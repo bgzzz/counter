@@ -169,5 +169,7 @@ func getHandler(t *testing.T, rw http.ResponseWriter, state uint64,
 	}
 
 	rw.WriteHeader(status)
-	rw.Write(b)
+	if _, err := rw.Write(b); err != nil {
+		t.Fatalf("unable to write rsp: %v", err)
+	}
 }

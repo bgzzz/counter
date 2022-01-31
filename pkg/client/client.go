@@ -22,7 +22,6 @@ func NewClient(host string) *Client {
 type Client struct {
 	hostURL    string
 	httpCLient *http.Client
-	timeout    string
 }
 
 func (cl *Client) GetCounterValue() (uint64, error) {

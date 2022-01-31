@@ -144,7 +144,10 @@ func sendCntRsp(w http.ResponseWriter,
 	}
 
 	w.WriteHeader(status)
-	w.Write(b)
+	if _, err := w.Write(b); err != nil {
+		log.Errorf("unable to write response: %v", err)
+		return
+	}
 	log.Debugf("get the counter with value %d was executed",
 		counter.Counter)
 }
