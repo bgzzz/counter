@@ -1,11 +1,17 @@
 package main
 
 import (
+	"fmt"
+	"path"
+
 	log "github.com/sirupsen/logrus"
 	"github.com/urfave/cli/v2"
 
 	cl "github.com/bgzzz/counter/pkg/client"
+	"github.com/bgzzz/counter/pkg/model"
 )
+
+const protocolSchemaTemplate = "http://%s"
 
 func createCtlApp() *cli.App {
 	flags := []cli.Flag{
@@ -34,7 +40,8 @@ func createCtlApp() *cli.App {
 				Usage:   "increment the counter",
 				Action: func(c *cli.Context) error {
 					return runAction(c, func(params *Parameters) error {
-						return cl.NewClient(params.host).IncrementCounterValue()
+						_, err := cl.NewClient(createURL(params.host)).IncrementCounterValue()
+						return err
 					})
 				},
 			},
@@ -44,7 +51,8 @@ func createCtlApp() *cli.App {
 				Usage:   "decrement the counter",
 				Action: func(c *cli.Context) error {
 					return runAction(c, func(params *Parameters) error {
-						return cl.NewClient(params.host).DecrementCounterValue()
+						_, err := cl.NewClient(createURL(params.host)).DecrementCounterValue()
+						return err
 					})
 				},
 			},
@@ -54,7 +62,8 @@ func createCtlApp() *cli.App {
 				Usage:   "get the counter value",
 				Action: func(c *cli.Context) error {
 					return runAction(c, func(params *Parameters) error {
-						return cl.NewClient(params.host).GetCounterValue()
+						_, err := cl.NewClient(createURL(params.host)).GetCounterValue()
+						return err
 					})
 				},
 			},
@@ -80,4 +89,12 @@ func runAction(c *cli.Context, f func(params *Parameters) error) error {
 	host := c.String("host")
 
 	return f(&Parameters{host: host})
+}
+
+func createURL(baseHost string) string {
+	return fmt.Sprintf(protocolSchemaTemplate,
+		path.Join(baseHost,
+			"api",
+			model.APIVersion,
+			"counter"))
 }
