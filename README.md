@@ -1,3 +1,3 @@
 # counter
-# counter
-# counter
+
+Client server setup of the counter
