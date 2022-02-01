@@ -15,9 +15,11 @@ import (
 const (
 	apiPrefix = "/api"
 
+	//MaxUint64 uint64 max value used to check if we can increment more
 	MaxUint64 = ^uint64(0)
 )
 
+// NewServer returns counter server object
 func NewServer(port int) *Server {
 	srv := Server{
 		port: port,
@@ -30,6 +32,7 @@ func NewServer(port int) *Server {
 	return &srv
 }
 
+// Server is a struct representing the counter server
 type Server struct {
 	port    int
 	httpSrv *http.Server
@@ -127,6 +130,7 @@ func (srv *Server) decrCounter(w http.ResponseWriter) {
 		http.StatusOK)
 }
 
+//Run starts the http server
 func (srv *Server) Run() error {
 	log.Infof("Running server on port: %d", srv.port)
 	return srv.httpSrv.ListenAndServe()
