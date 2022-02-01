@@ -1,4 +1,5 @@
-FROM maerskao.azurecr.io/alcl/golang-1.16-alpine:2cd1b4abe716a9e2659f6e96cca066367f5a9754 AS builder
+FROM golang:alpine AS builder
+RUN apk add --update --no-cache make
 
 WORKDIR /app
 
@@ -8,8 +9,10 @@ RUN make mod
 COPY . .
 RUN make build
 
-FROM maerskao.azurecr.io/alcl/alpine:3.14
+FROM golang:alpine
 
-COPY --from=builder /app/bin/alcl-go-function-template /alcl-go-function-template
+COPY --from=builder /app/bin/counter /counter
+#in case of running it from the container
+COPY --from=builder /app/bin/counterctl /counterctl
 
-ENTRYPOINT [ "/alcl-go-function-template" ]
+ENTRYPOINT [ "/counter" ]
