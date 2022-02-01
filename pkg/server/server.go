@@ -80,7 +80,7 @@ func (srv *Server) getCounter(w http.ResponseWriter) {
 	log.Debugf("get the counter with value %d was executed",
 		counter.Counter)
 
-	sendCntRsp(w, &counter, http.StatusAccepted)
+	sendCntRsp(w, &counter, http.StatusOK)
 }
 
 func (srv *Server) incrCounter(w http.ResponseWriter) {
@@ -124,7 +124,7 @@ func (srv *Server) decrCounter(w http.ResponseWriter) {
 		srv.counter)
 
 	sendCntRsp(w, &model.CounterRsp{Counter: srv.counter},
-		http.StatusAccepted)
+		http.StatusOK)
 }
 
 func (srv *Server) Run() error {
