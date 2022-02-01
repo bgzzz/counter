@@ -35,11 +35,10 @@ By default server is running on port 8080, in order to run it with
 default parameters you need to execute the binary:
 
 ```bash
-➜  counter git:(client) ✗ ./bin/counter
-{"level":"info","msg":"Running server on port: 8080","time":"2022-01-31T15:33:15+01:00"}
-{"level":"debug","msg":"increment counter with value %d was executed1","time":"2022-01-31T15:33:21+01:00"}
-{"level":"debug","msg":"get the counter with value %d was executed1","time":"2022-01-31T15:33:21+01:00"}
-{"level":"debug","msg":"increment counter with value %d was executed2","time":"2022-01-31
+➜  counter git:(docs) ✗ ./bin/counter
+{"level":"info","msg":"Running server on port: 8080","time":"2022-02-01T12:32:18+01:00"}
+{"level":"debug","msg":"increment counter with value 1 was executed","time":"2022-02-01T12:32:28+01:00"}
+{"level":"debug","msg":"get the counter with value 1 was executed","time":"2022-02-01T12:32:28+01:00"}
 ```
 
 #### Interact with the server 

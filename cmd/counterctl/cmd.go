@@ -71,6 +71,7 @@ func createCtlApp() *cli.App {
 	}
 }
 
+//Parameters struct that conveys the main parameters of the app
 type Parameters struct {
 	host string
 }

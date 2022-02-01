@@ -12,6 +12,7 @@ import (
 	log "github.com/sirupsen/logrus"
 )
 
+//NewClient creates new counter api client
 func NewClient(host string) *Client {
 	return &Client{
 		httpCLient: &http.Client{},
@@ -19,11 +20,15 @@ func NewClient(host string) *Client {
 	}
 }
 
+//Client is a struct that conveys parameters of the
+// counter api client
 type Client struct {
 	hostURL    string
 	httpCLient *http.Client
 }
 
+//GetCounterValue calls the remote server to retreive the counter value
+//return current counter value and error if occurs
 func (cl *Client) GetCounterValue() (uint64, error) {
 	resp, err := cl.httpCLient.Get(cl.hostURL)
 	if err != nil {
@@ -39,6 +44,8 @@ func (cl *Client) GetCounterValue() (uint64, error) {
 	return getCounterValue(resp.Body)
 }
 
+//IncrementCounterValue calls the remote server to increment the counter value
+//return current counter value after increment and error if occurs
 func (cl *Client) IncrementCounterValue() (uint64, error) {
 	log.Debug("Incrementing counter value")
 
@@ -70,6 +77,8 @@ func (cl *Client) IncrementCounterValue() (uint64, error) {
 	return getCounterValue(resp.Body)
 }
 
+//DecrementCounterValue calls the remote server to decrement the counter value
+//returns counter value after decrement and error if occurs
 func (cl *Client) DecrementCounterValue() (uint64, error) {
 	log.Debug("Decrementing counter value")
 
