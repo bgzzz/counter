@@ -78,6 +78,41 @@ Example:
 unable to decrement, counter has reached its minimum value
 ```
 
+### Client
+
+Client is made in a format of CLI. By default it tries to reach the server 
+running on localhost:8080
+
+#### Help
+```bash
+➜  counter git:(readme-client) ./bin/counterctl 
+NAME:
+   counterctl - counterctl is a client side application calling the counter server
+
+USAGE:
+   counterctl [global options] command [command options] [arguments...]
+
+COMMANDS:
+   increment, i  increment the counter
+   decrement, d  decrement the counter
+   get, g        get the counter value
+   help, h       Shows a list of commands or help for one command
+
+GLOBAL OPTIONS:
+   --log-level value  log-level "debug" (more on the supported levels here: https://github.com/sirupsen/logrus/blob/fdf1618bf7436ec3ee65753a6e2999c335e97221/logrus.go#L25) (default: "debug") [$LOG_LEVEL]
+   --host value       --host localhost:8080 (default: "localhost:8080") [$host]
+   --help, -h         show help (default: false)
+```
+
+##### Increment example (the rect CMDs can be used similarly)
+```bash
+➜  counter git:(readme-client) ./bin/counterctl increment
+{"level":"debug","msg":"Incrementing counter value","time":"2022-02-01T02:02:19+01:00"}
+{"level":"debug","msg":"Getting counter value","time":"2022-02-01T02:02:19+01:00"}
+{"level":"info","msg":"Counter value is 1","time":"2022-02-01T02:02:19+01:00"}
+```
+
+
 ### Build the project 
 
 To build the project you need to execute following command
